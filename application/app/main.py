@@ -9,83 +9,87 @@ from typing import List
 # Initialize FastAPI
 app = FastAPI()
 
-# SQLAlchemy setup
-SQLALCHEMY_DATABASE_URL = "postgresql://postgres:password@localhost/gtuc"
-engine = create_engine(SQLALCHEMY_DATABASE_URL)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-Base = declarative_base()
+@app.get("/")
+async def HomePage():
+    return {"message": "Welcome to AppRunner Tutorials"}
 
-# Database model
-class ItemModel(Base):
-    __tablename__ = "items"
+# # SQLAlchemy setup
+# SQLALCHEMY_DATABASE_URL = "postgresql://postgres:password@localhost/gtuc"
+# engine = create_engine(SQLALCHEMY_DATABASE_URL)
+# SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+# Base = declarative_base()
 
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, index=True)
-    description = Column(String, index=True, nullable=True)
-    price = Column(Float)
-    in_stock = Column(Boolean, default=True)
+# # Database model
+# class ItemModel(Base):
+#     __tablename__ = "items"
 
-# Create tables
-Base.metadata.create_all(bind=engine)
+#     id = Column(Integer, primary_key=True, index=True)
+#     name = Column(String, index=True)
+#     description = Column(String, index=True, nullable=True)
+#     price = Column(Float)
+#     in_stock = Column(Boolean, default=True)
 
-# Pydantic models
-class ItemBase(BaseModel):
-    name: str
-    description: str
-    price: float
-    in_stock: bool
+# # Create tables
+# Base.metadata.create_all(bind=engine)
 
-class Item(ItemBase):
-    id: int
+# # Pydantic models
+# class ItemBase(BaseModel):
+#     name: str
+#     description: str
+#     price: float
+#     in_stock: bool
 
-# CRUD operations
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+# class Item(ItemBase):
+#     id: int
 
-# Create operation
-@app.post("/items/", response_model=Item)
-async def create_item(item: ItemBase, db: Session = Depends(get_db)):
-    db_item = ItemModel(**item.dict())
-    db.add(db_item)
-    db.commit()
-    db.refresh(db_item)
-    return db_item
+# # CRUD operations
+# def get_db():
+#     db = SessionLocal()
+#     try:
+#         yield db
+#     finally:
+#         db.close()
 
-# Read operation
-@app.get("/items/", response_model=List[Item])
-async def read_items(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
-    items = db.query(ItemModel).offset(skip).limit(limit).all()
-    return items
+# # Create operation
+# @app.post("/items/", response_model=Item)
+# async def create_item(item: ItemBase, db: Session = Depends(get_db)):
+#     db_item = ItemModel(**item.dict())
+#     db.add(db_item)
+#     db.commit()
+#     db.refresh(db_item)
+#     return db_item
 
-@app.get("/items/{item_id}", response_model=Item)
-async def read_item(item_id: int, db: Session = Depends(get_db)):
-    item = db.query(ItemModel).filter(ItemModel.id == item_id).first()
-    if item is None:
-        raise HTTPException(status_code=404, detail="Item not found")
-    return item
+# # Read operation
+# @app.get("/items/", response_model=List[Item])
+# async def read_items(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
+#     items = db.query(ItemModel).offset(skip).limit(limit).all()
+#     return items
 
-# Update operation
-@app.put("/items/{item_id}", response_model=Item)
-async def update_item(item_id: int, item: ItemBase, db: Session = Depends(get_db)):
-    db_item = db.query(ItemModel).filter(ItemModel.id == item_id).first()
-    if db_item is None:
-        raise HTTPException(status_code=404, detail="Item not found")
-    for key, value in item.dict().items():
-        setattr(db_item, key, value)
-    db.commit()
-    db.refresh(db_item)
-    return db_item
+# @app.get("/items/{item_id}", response_model=Item)
+# async def read_item(item_id: int, db: Session = Depends(get_db)):
+#     item = db.query(ItemModel).filter(ItemModel.id == item_id).first()
+#     if item is None:
+#         raise HTTPException(status_code=404, detail="Item not found")
+#     return item
 
-# Delete operation
-@app.delete("/items/{item_id}", response_model=Item)
-async def delete_item(item_id: int, db: Session = Depends(get_db)):
-    item = db.query(ItemModel).filter(ItemModel.id == item_id).first()
-    if item is None:
-        raise HTTPException(status_code=404, detail="Item not found")
-    db.delete(item)
-    db.commit()
-    return item
+# # Update operation
+# @app.put("/items/{item_id}", response_model=Item)
+# async def update_item(item_id: int, item: ItemBase, db: Session = Depends(get_db)):
+#     db_item = db.query(ItemModel).filter(ItemModel.id == item_id).first()
+#     if db_item is None:
+#         raise HTTPException(status_code=404, detail="Item not found")
+#     for key, value in item.dict().items():
+#         setattr(db_item, key, value)
+#     db.commit()
+#     db.refresh(db_item)
+#     return db_item
+
+# # Delete operation
+# @app.delete("/items/{item_id}", response_model=Item)
+# async def delete_item(item_id: int, db: Session = Depends(get_db)):
+#     item = db.query(ItemModel).filter(ItemModel.id == item_id).first()
+#     if item is None:
+#         raise HTTPException(status_code=404, detail="Item not found")
+#     db.delete(item)
+#     db.commit()
+#     return item
