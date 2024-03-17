@@ -5,6 +5,10 @@ from fastapi import Depends, FastAPI, HTTPException
 from sqlalchemy.orm import sessionmaker, Session
 from pydantic import BaseModel
 from typing import List
+import os
+
+# Get Environment Variables
+DATABASE_URL=os.getenv("DATABASE_URL")
 
 # Initialize FastAPI
 app = FastAPI()
@@ -13,8 +17,12 @@ app = FastAPI()
 async def HomePage():
     return {"message": "Welcome to AppRunner Tutorials"}
 
+@app.get("/deploy")
+async def HomePage():
+    return {"message": "Testing CICD authomatic Deployment"}
+
 # # SQLAlchemy setup
-# SQLALCHEMY_DATABASE_URL = "postgresql://postgres:password@localhost/gtuc"
+# SQLALCHEMY_DATABASE_URL = DATABASE_URL
 # engine = create_engine(SQLALCHEMY_DATABASE_URL)
 # SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 # Base = declarative_base()
