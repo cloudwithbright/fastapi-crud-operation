@@ -1,0 +1,18 @@
+name: github actions
+on:
+  push:
+    branches:
+      - main
+env:
+  Username: King
+  Age: 100
+jobs:
+  Demo:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps
+    steps:
+      - id: "CheckoutRepo"
+        name: Checkout repository
+        uses: actions/checkout@v4
