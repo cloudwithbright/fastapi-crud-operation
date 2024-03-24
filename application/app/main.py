@@ -8,7 +8,13 @@ from typing import List
 import os
 
 # Get Environment Variables
-DATABASE_URL=os.getenv("DATABASE_URL")
+DB_URL="gtuc.cxkgmu2wcs9v.us-east-1.rds.amazonaws.com"
+DATABASE_PWD="elTsgxu:zfR{k0VMi$)D|0SQxAsD"
+DATABASE_USR="postgres"
+DATABASE="gtuc"
+
+DB_CREDENTIALS=f"postgresql://{DATABASE_USR}:{DATABASE_PWD}@{DB_URL}/{DATABASE}"
+DATABASE_URL=DB_CREDENTIALS
 
 # Initialize FastAPI
 app = FastAPI()
