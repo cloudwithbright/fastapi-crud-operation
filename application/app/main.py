@@ -7,16 +7,16 @@ from pydantic import BaseModel
 from typing import List
 import os
 
-# Get Environment Variables
-# DB_URL="gtuc.cxkgmu2wcs9v.us-east-1.rds.amazonaws.com"
-# DATABASE_PWD="elTsgxu:zfR{k0VMi$)D|0SQxAsD"
-# DATABASE_USR="postgres"
-# DATABASE="gtuc"
+#Get Environment Variables
+DB_URL="gtuc.cxkgmu2wcs9v.us-east-1.rds.amazonaws.com" 
+DATABASE_PWD="Nvngd76:g6nQ1)U5SO)l_wk4VS{V"
+DATABASE_USR="postgres"
+DATABASE="gtuc"
 
-DB_URL=os.getenv("DB_URL")
-DATABASE_PWD=os.getenv("DATABASE_PWD")
-DATABASE_USR=os.getenv("DATABASE_USR")
-DATABASE=os.getenv("DATABASE")
+# DB_URL=os.getenv("DB_URL")
+# DATABASE_PWD=os.getenv("DATABASE_PWD")
+# DATABASE_USR=os.getenv("DATABASE_USR")
+# DATABASE=os.getenv("DATABASE")
 
 DB_CREDENTIALS=f"postgresql://{DATABASE_USR}:{DATABASE_PWD}@{DB_URL}/{DATABASE}"
 DATABASE_URL=DB_CREDENTIALS
