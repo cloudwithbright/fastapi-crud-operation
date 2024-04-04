@@ -1,6 +1,6 @@
 import unittest
 from sqlalchemy import create_engine
-from app.main import app, Base, Item
+from main import app, Base, Item
 from sqlalchemy.orm import sessionmaker
 from fastapi.testclient import TestClient
 
