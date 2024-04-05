@@ -1,0 +1,83 @@
+### Add Item (1)
+POST {{Hostname}}/items/ HTTP/1.1
+Content-type: application/json; charset=utf8
+X-User: 1
+
+{
+  "name": "Fish",
+  "description": "Got it from Ghana",
+  "price": 100,
+  "in_stock": true
+}
+
+### Add Item (2)
+POST {{Hostname}}/items HTTP/1.1
+Content-type: application/json; charset=utf8
+X-User: 1
+
+{
+  "name": "Dog",
+  "description": "Black dog",
+  "price": 200,
+  "in_stock": false
+}
+
+### Add Item (3)
+POST {{Hostname}}/items HTTP/1.1
+Content-type: application/json; charset=utf8
+X-User: 1
+
+{
+  "name": "Pig",
+  "description": "Fat pig",
+  "price": 300,
+  "in_stock": true
+}
+
+### Add Item (4)
+POST {{Hostname}}/items HTTP/1.1
+Content-type: application/json; charset=utf8
+X-User: 1
+
+{
+  "name": "Elephant",
+  "description": "Blue elephant",
+  "price": 400,
+  "in_stock": false
+}
+
+### Add Item (5)
+POST {{Hostname}}/items HTTP/1.1
+Content-type: application/json; charset=utf8
+X-User: 1
+
+{
+  "name": "Sheep",
+  "description": "White sheep",
+  "price": 500,
+  "in_stock": true
+}
+
+### Get all items
+GET {{Hostname}}/items HTTP/1.1
+
+### Get item by id
+# @prompt Id
+GET {{Hostname}}/items/{{Id}} HTTP/1.1
+
+### DELETE item by id
+# @prompt Id
+DELETE {{Hostname}}/items/{{Id}} HTTP/1.1
+
+### Update an item
+# @prompt Id
+PUT {{Hostname}}/items/{{Id}} HTTP/1.1
+Content-type: application/json; charset=utf8
+X-User: 1
+
+{
+  "name": "Rat",
+  "description": "This is a white Rat",
+  "price": 390,
+  "in_stock": false
+}

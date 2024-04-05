@@ -1,0 +1,14 @@
+{
+    "rest-client.environmentVariables": {
+
+        "$shared": {
+            "apikey": ""
+        },
+        "Local": {
+            "Hostname": "http://localhost:8081"
+        },
+        "Cloud": {
+            "Hostname": "https://kz2dcp6rjq.us-east-1.awsapprunner.com"
+        }
+    }
+}
