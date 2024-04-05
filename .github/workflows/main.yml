@@ -3,9 +3,6 @@ on:
   push:
     branches:
       - main
-env:
-  Username: King
-  Age: 100
 jobs:
   Demo:
     runs-on: ubuntu-latest
