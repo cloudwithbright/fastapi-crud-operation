@@ -3,3 +3,4 @@ venv
 app/__pycache__
 app/src/__pycache__
 app/src/*/__pycache__
+app/.pytest_cache

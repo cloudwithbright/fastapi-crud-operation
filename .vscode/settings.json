@@ -5,7 +5,7 @@
             "apikey": ""
         },
         "Local": {
-            "Hostname": "http://localhost:8081"
+            "Hostname": "http://localhost:8000"
         },
         "Cloud": {
             "Hostname": "https://kz2dcp6rjq.us-east-1.awsapprunner.com"

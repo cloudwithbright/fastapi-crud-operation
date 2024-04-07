@@ -5,7 +5,7 @@ X-User: 1
 
 {
   "name": "Fish",
-  "description": "Got it from Ghana",
+  "description": "Fish from Ghana",
   "price": 100,
   "in_stock": true
 }
@@ -55,6 +55,18 @@ X-User: 1
   "name": "Sheep",
   "description": "White sheep",
   "price": 500,
+  "in_stock": true
+}
+
+### Add Item (6)
+POST {{Hostname}}/items HTTP/1.1
+Content-type: application/json; charset=utf8
+X-User: 1
+
+{
+  "name": "Tiger",
+  "description": "America tiger",
+  "price": 700,
   "in_stock": true
 }
 
