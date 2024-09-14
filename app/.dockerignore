@@ -30,3 +30,6 @@ venv
 app/__pycache__
 app/src/__pycache__
 app/src/*/__pycache__
+init.sql
+.pytest_cache
+__pycache__

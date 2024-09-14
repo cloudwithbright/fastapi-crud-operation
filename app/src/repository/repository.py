@@ -30,7 +30,7 @@ def create_item(item: ItemBase, db: Session):
 
 
 ## Read operation
-def read_items(db: Session = None, skip: int = 0, limit: int = 10):
+def read_items(db: Session = None, skip: int = 0, limit: int = 30):
 
     items = db.query(ItemModel).offset(skip).limit(limit).all()
     if len(items) <= 0:

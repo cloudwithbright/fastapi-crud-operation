@@ -1,5 +1,5 @@
 ## Import Libries
-from fastapi import APIRouter
+from fastapi import APIRouter, File, UploadFile
 from src.models.Items import ItemBase
 from src.service.service import (
     create_item_svc,
@@ -8,6 +8,8 @@ from src.service.service import (
     read_items_svc,
     update_item_svc,
 )
+import shutil
+import os
 
 ## Initialize APIRouter
 router = APIRouter()
@@ -45,3 +47,21 @@ async def update_item_cont(item_id: int, item: ItemBase):
 @router.delete("/items/{item_id}")
 async def delete_item_cont(item_id: int):
     return delete_item_svc(item_id)
+
+# Define the upload directory
+UPLOAD_DIR = "/tmp"
+os.makedirs(UPLOAD_DIR, exist_ok=True)
+
+@router.post("/uploadfile/")
+async def create_upload_file(file: UploadFile = File(...)):
+    
+    # Create the file path
+    file_path = os.path.join(UPLOAD_DIR, file.filename)
+        
+    # Save the file
+    with open(file_path, "wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+    
+    print(os.listdir("/tmp"))
+    return {"message": "File uploaded successfully. Thank you!"}
+     

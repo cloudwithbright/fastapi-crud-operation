@@ -1,5 +1,5 @@
 ### Add Item (1)
-POST {{Hostname}}/items/ HTTP/1.1
+POST {{Hostname}}/items HTTP/1.1
 Content-type: application/json; charset=utf8
 X-User: 1
 
