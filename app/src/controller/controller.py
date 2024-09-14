@@ -18,7 +18,7 @@ router = APIRouter()
 ## Add Controllers
 @router.get("/")
 async def Welcome():
-    return {"message": "Welcome to AppRunner Tutorials"}
+    return {"message": "Endpoint is working. Thank you!"}
 
 
 @router.post("/items")
