@@ -18,7 +18,7 @@ router = APIRouter()
 ## Add Controllers
 @router.get("/")
 async def Welcome():
-    return {"message": "Endpoint is working. Thank you!"}
+    return {"message": "API Started Successfully. Thank you!"}
 
 
 @router.post("/items")
