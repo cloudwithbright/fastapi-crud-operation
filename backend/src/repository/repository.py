@@ -16,7 +16,7 @@ def get_db():
 ## Add Repositories Functions
 def create_item(item: ItemBase, db: Session):
 
-    db_item = db.query(ItemModel).filter(ItemModel.name == item.name).first()
+    db_item = db.query(ItemModel).filter(ItemModel.name == item.name, ItemModel.description == item.description, ItemModel.price == item.price, ItemModel.in_stock == item.in_stock).first()
     if db_item is None:
 
         db_item = ItemModel(**item.dict())
