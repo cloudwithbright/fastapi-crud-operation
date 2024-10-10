@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8000'; // Update with your FastAPI URL
+const API_URL = import.meta.env.VITE_API_URL
 
 export const getItems = async () => {
     const response = await axios.get(`${API_URL}/items`);

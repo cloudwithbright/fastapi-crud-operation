@@ -70,7 +70,8 @@ export default {
         });
 
         const toast = useToast();
-
+        const API_URI = ""
+        
         const fetchItems = async () => {
             const response = await getItems();
             items.value = response.data;
