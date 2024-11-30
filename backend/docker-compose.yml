@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+    command: uvicorn main:app --host 0.0.0.0 --port 8000
+    working_dir: /app
+    volumes:
+      - /app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - DB_URL=db
+      - DATABASE=items-db
+      - DATABASE_USR=user
+      - DATABASE_PWD=password
+      - SECRETS_NAME=mytest-secrets
+      - REGION_NAME=us-east-2
+
+  db:
+    image: postgres:16
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-data.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=items-db
+
+volumes:
+  postgres_data:

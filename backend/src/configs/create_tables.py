@@ -1,13 +1,19 @@
 ## Import Libries
 from sqlalchemy import create_engine, Column, Integer, String, Float, Boolean
 from sqlalchemy.orm import sessionmaker, declarative_base
-import os
 
-#Get Environment Variables
-DB_URL=os.getenv("DB_URL")
-DATABASE=os.getenv("DATABASE")
-DATABASE_PWD=os.getenv("DATABASE_PWD")
-DATABASE_USR=os.getenv("DATABASE_USR")
+from backend.src.configs.secrets import get_secret
+my_secrets = get_secret()
+DB_URL=my_secrets["host"]
+DATABASE=my_secrets["dbname"]
+DATABASE_PWD=my_secrets["password"]
+DATABASE_USR=my_secrets["username"]
+
+# import os
+# DB_URL=os.getenv("DB_URL")
+# DATABASE=os.getenv("DATABASE")
+# DATABASE_PWD=os.getenv("DATABASE_PWD")
+# DATABASE_USR=os.getenv("DATABASE_USR")
 
 # Setup Database Credentials
 DATABASE_URL=f"postgresql://{DATABASE_USR}:{DATABASE_PWD}@{DB_URL}/{DATABASE}"
